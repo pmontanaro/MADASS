@@ -8,7 +8,7 @@ public class Order {
 
     private String orderId;
     private String orderName;
-   // private String quantity;
+    private String quantity;
     private String price;
 
     public Order() {
