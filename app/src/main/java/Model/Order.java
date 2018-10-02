@@ -7,7 +7,7 @@ import Model.Food;
 public class Order {
 
     private String orderId;
-    private String orderName;
+    private String orderName; // Use as table number
     private String quantity;
     private String price;
 

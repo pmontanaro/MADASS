@@ -1,6 +1,7 @@
 package com.example.petermontanaro.assignment;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import Database.Database;
 
 import com.google.firebase.database.DatabaseReference;
@@ -35,7 +38,8 @@ public class Cart extends AppCompatActivity {
     TextView txtTotal;
     Button btnOrder;
     Button btnClear;
-
+    Database db;
+    Intent billScreen = new Intent(this, Bill.class);
 
     List<Order> cart = new ArrayList<>();
     CartHolder adapter;
@@ -56,31 +60,86 @@ public class Cart extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         txtTotal = (TextView)findViewById(R.id.total);
+
+        // BUTTON TO WORK ON PLACE ORDER
         btnOrder = (Button)findViewById(R.id.btnOrder);
+
+        // BTN PETER IS WORKING ON TO CLEAR ORDER
         btnClear = (Button)findViewById(R.id.btnClearCart);
 
-      /*  btnClear.setOnClickListener(new View.OnClickListener() {
+        btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAlert();
+                AlertDialog.Builder submitOrder = new AlertDialog.Builder(Cart.this);
+                submitOrder.setMessage("Are you sure you want to submit you order?");
+                submitOrder.setCancelable(true);
+
+                submitOrder.setPositiveButton(
+                        "Submit",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                startActivity(billScreen);
+
+                            }
+                        });
+
+                submitOrder.setNegativeButton(
+                        "Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog clearAlert = submitOrder.create();
+                clearAlert.show();
             }
-        });*/
+        });
+
+
+
+
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Build an alert when clear cart is selected, to confirm clear cart action
+
+                AlertDialog.Builder clearCart = new AlertDialog.Builder(Cart.this);
+                clearCart.setMessage("Are you sure you want to clear cart? This will remove all items from the cart.");
+                clearCart.setCancelable(true);
+
+                clearCart.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                new Database(getBaseContext()).clearCart();
+                                loadFoods();
+                                txtTotal.setText("$0");
+                                dialog.cancel();
+                                Toast.makeText(Cart.this, "Cart has been cleared.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                clearCart.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog clearAlert = clearCart.create();
+                clearAlert.show();
+            }
+        });
 
         loadFoods();
     }
 
-     /*   private void showAlert() {
-            AlertDialog.Builder dial = new AlertDialog.Builder(Cart.this);
-            dial.setTitle("WARNING");
-            dial.setMessage("Are you sure you want to clear your cart?");
 
-            dial.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
 
-                }
-            });
-        }*/
 
 
     private void loadFoods() {
@@ -89,6 +148,7 @@ public class Cart extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         // calculate total price
+        int xero = 0;
         int total = 0;
         for(Order order:cart)
         {
@@ -98,6 +158,9 @@ public class Cart extends AppCompatActivity {
             NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
 
             txtTotal.setText(fmt.format(total));
+
+
         }
+
     }
 }

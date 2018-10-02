@@ -16,52 +16,57 @@
         app:cardBackgroundColor="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="100dp">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_margin="8dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total: "
-
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="$100000"
-
-                android:textSize="24sp" />
-                </LinearLayout>
-
-        <Button
-            android:id="@+id/btnOrder"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_height="match_parent"
+            tools:background="@color/fbutton_color_wet_asphalt">
 
-            android:text="Place Order" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnClearCart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/btnOrder"
-            android:layout_alignParentTop="true"
-            android:text="Clear Cart" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total: "
+
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$0"
+
+                    android:textSize="24sp"
+                    tools:textColor="@color/common_google_signin_btn_text_dark_default" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+
+                android:text="Place Order" />
+
+            <Button
+                android:id="@+id/btnClearCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/btnOrder"
+                android:layout_alignParentTop="true"
+                android:text="Clear Cart" />
 
 
-    </RelativeLayout>
+        </RelativeLayout>
     </android.support.v7.widget.CardView>
 
 

@@ -3,7 +3,7 @@ package com.example.petermontanaro.assignment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import Database.Database;
+
 
 public class MainActivity extends AppCompatActivity {
 

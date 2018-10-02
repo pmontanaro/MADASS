@@ -47,7 +47,6 @@ public class FoodList extends AppCompatActivity {
 
         foodList = database.getReference("Food");
 
-       // cartBtn = (FloatingActionButton) findViewById(R.id.btnCart) ;
 
         recyclerView = (RecyclerView)findViewById(R.id.recycler_food);
         recyclerView.setHasFixedSize(true);
@@ -104,29 +103,8 @@ public class FoodList extends AppCompatActivity {
 
                     }
                 });
- /*               setContentView(R.layout.food_item);
-
-                cartBtn = (FloatingActionButton)findViewById(R.id.btnCart);
-                cartBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        new Database(getBaseContext()).addToCart(new Order(
-                                local.getMenuID(),
-                                local.getName(),
-                                local.getPrice()
-                        ));
-                        Toast.makeText(FoodList.this, ""+local.getName()+" was added to cart.", Toast.LENGTH_SHORT).show();
-                    }
-                });*/
-
-
-
             }
         };
-
-
-
 
         // Set adapt
         Log.d("TAG", ""+adapter.getItemCount());
